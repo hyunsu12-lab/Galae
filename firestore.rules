@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users collection
+    match /users/{userId} {
+      // Users can read/write their own profile
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // Bookmarks subcollection
+      match /bookmarks/{bookmarkId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+    
+    // Benefits collection
+    match /benefits/{benefitId} {
+      // Everyone can read benefits
+      allow read: if true;
+      
+      // Only admins can write (check by email)
+      // MVP 단계: 관리자 이메일을 여기에 직접 입력하세요
+      // 예: request.auth.token.email == 'admin@example.com'
+      allow write: if request.auth != null && 
+        request.auth.token.email == 'YOUR_ADMIN_EMAIL@example.com';
+      
+      // 주의: 실제 운영 시에는 더 안전한 방법 사용 권장
+      // (예: Custom Claims 사용)
+    }
+  }
+}
+
