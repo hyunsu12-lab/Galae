@@ -28,4 +28,18 @@ dist-ssr
 .env.local
 .env.production
 
+# Build outputs
+dist/
+build/
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# OS
+.DS_Store
+Thumbs.db
+
 
