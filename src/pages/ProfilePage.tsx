@@ -4,7 +4,7 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 import { useAuthStore } from '../store/authStore';
 import { getUserProfile, createUserProfile, updateUserProfile } from '../services/firestore';
 import type { SchoolLevel, IncomeBucket, GuardianStatus } from '../types';
-import { REGIONS, getCitiesByProvince, getAllProvinces } from '../config/regions';
+import { getCitiesByProvince, getAllProvinces } from '../config/regions';
 
 const ProfilePage = () => {
   const { user } = useAuthStore();

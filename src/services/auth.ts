@@ -5,8 +5,6 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
-import { createUserProfile } from './firestore';
-import type { UserProfile } from '../types';
 
 export const signUp = async (
   email: string,

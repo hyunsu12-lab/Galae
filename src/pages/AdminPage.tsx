@@ -10,7 +10,7 @@ import {
 } from '../services/firestore';
 import type { Benefit, BenefitCategory, IncomeCondition, GuardianRequired } from '../types';
 import { Timestamp } from 'firebase/firestore';
-import { REGIONS, getCitiesByProvince, getAllProvinces } from '../config/regions';
+import { getCitiesByProvince, getAllProvinces } from '../config/regions';
 
 const AdminPage = () => {
   const { user } = useAuthStore();

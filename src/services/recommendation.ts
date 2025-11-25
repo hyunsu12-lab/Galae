@@ -19,7 +19,6 @@ export const recommendBenefits = (benefits: Benefit[], userProfile: UserProfile)
   const scored: BenefitWithScore[] = benefits
     .map((benefit) => {
       let score = 0;
-      let isMatch = false;
 
       // Age check
       const ageMatch = userAge >= benefit.targetAgeMin && userAge <= benefit.targetAgeMax;
@@ -74,7 +73,6 @@ export const recommendBenefits = (benefits: Benefit[], userProfile: UserProfile)
       if (!guardianMatch) return null;
 
       // All conditions passed
-      isMatch = true;
 
       // Score calculation
       // Complete match: all specific conditions match (not 'ALL' or 'none' or 'irrelevant')
@@ -82,10 +80,10 @@ export const recommendBenefits = (benefits: Benefit[], userProfile: UserProfile)
       const hasSpecificIncome = benefit.incomeCondition !== 'none';
       const hasSpecificGuardian = benefit.guardianRequired !== 'irrelevant';
 
-      const specificMatches =
-        (hasSpecificRegion ? regionMatch : true) +
-        (hasSpecificIncome ? incomeMatch : true) +
-        (hasSpecificGuardian ? guardianMatch : true);
+      let specificMatches = 0;
+      if (hasSpecificRegion && regionMatch) specificMatches++;
+      if (hasSpecificIncome && incomeMatch) specificMatches++;
+      if (hasSpecificGuardian && guardianMatch) specificMatches++;
 
       if (specificMatches >= 2) {
         score += 2; // Complete match
